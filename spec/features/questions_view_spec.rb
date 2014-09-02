@@ -43,15 +43,17 @@ describe 'When viewing the home page' do
 		expect(page).not_to have_content "How?"
 	end
 
-	it "displays answers associated with questions" do
-
-	end
-
 	it "can add an answer to a specific question" do
 		click_link_or_button "How?"
 		fill_in "Response:", with: "Wait for it..."
 		click_link_or_button "Submit Answer"
 		expect(page).to have_content "Wait for it..."
+	end
+
+	it "displays a question score" do
+		expect(page).to have_content "0"
+		click_link_or_button "+"
+		expect(page).to have_content "1"
 	end
 
 end

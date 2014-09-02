@@ -4,7 +4,17 @@
 <table class="table">
 	<% @questions.each do |question| %>
 		<tr class="table-row">
-			<td>(score)</td>
+			<td>
+				<%= form_for question, html: { class: 'inline' } do |f| %>
+					<%= f.hidden_field :vote, value: -1, class: "inline" %>
+					<%= f.submit "-", class: "btn btn-default btn-sm inline" %>		
+				<% end %>
+				<span class="inline-btn"><%= question.score %></span>
+				<%= form_for question, html: { class: 'inline' } do |f|%>
+					<%= f.hidden_field :vote, value: 1, class: "inline" %>
+					<%= f.submit "+", class: "btn btn-default btn-sm inline" %>		
+				<% end %>
+			</td>
 			<td><%= link_to question.title, question %></td>
 			<td><%= question.answers.count %> Answers</td>
 			<td><%= link_to "Delete", question, method: :delete, class: "btn btn-danger btn-xs" %></td>

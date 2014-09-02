@@ -13,6 +13,22 @@ class QuestionsController < ApplicationController
 		@question = Question.new
 	end
 
+	def update
+		@question = Question.find(params[:id])
+		
+		if params[:question][:vote]
+			@question.score += params[:question][:vote].to_i
+		end
+		
+		if @question.save
+			flash[:success] = "Updated!"
+			redirect_to questions_path
+		else
+			flash[:error] = "Something went wrong. Try again."
+			redirect_to questions_path
+		end
+	end
+
 	def create
 		@question = Question.new(question_params)
 		if @question.save

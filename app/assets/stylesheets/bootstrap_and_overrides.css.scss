@@ -2,6 +2,17 @@
 div.flash.success { border: 2px solid green; color: green;}
 div.flash.error   { border: 2px solid red; 	 color: red;}
 
+//
+.inline {
+	display: inline;
+}
+
+.inline-btn {
+	margin: 3px;
+	padding: 0;
+	display: inline;
+}
+
 // IMPORTS //
 @import "bootstrap-sprockets";
 @import 'bootstrap';
