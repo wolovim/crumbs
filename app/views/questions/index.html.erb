@@ -4,6 +4,7 @@
 <table class="table">
 	<% @questions.each do |question| %>
 		<tr class="table-row">
+			<td>(score)</td>
 			<td><%= link_to question.title, question %></td>
 			<td><%= question.answers.count %> Answers</td>
 			<td><%= link_to "Delete", question, method: :delete, class: "btn btn-danger btn-xs" %></td>

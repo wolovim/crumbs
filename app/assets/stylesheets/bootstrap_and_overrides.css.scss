@@ -1,3 +1,7 @@
+// FLASH MSG //
+div.flash.success { border: 2px solid green; color: green;}
+div.flash.error   { border: 2px solid red; 	 color: red;}
+
 // IMPORTS //
 @import "bootstrap-sprockets";
 @import 'bootstrap';

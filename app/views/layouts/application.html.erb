@@ -9,7 +9,21 @@
 <body>
 
 <div class="container">
-	<%= yield %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :class => "alert flash #{name}" %>
+  <% end %>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-6">
+		
+			<%= yield %>
+		
+	</div>
+	<div class="col-md-3">
+	</div>
 </div>
 
 </body>
