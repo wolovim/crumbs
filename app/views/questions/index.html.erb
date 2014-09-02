@@ -1,0 +1,12 @@
+<br/>
+<%= link_to "Ask a question", new_question_path, class: "btn btn-primary" %>
+<h1>Questions!</h1>
+<table class="table">
+	<% @questions.each do |question| %>
+		<tr class="table-row">
+			<td><%= link_to question.title, question %></td>
+			<td><%= question.answers.count %> Answers</td>
+			<td><%= link_to "Delete", question, method: :delete, class: "btn btn-danger btn-xs" %></td>
+		</tr>
+	<% end %>
+</table>

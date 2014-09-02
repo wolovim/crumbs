@@ -17,8 +17,11 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
-gem 'rspec-rails'
-gem 'capybara'
+group :testing, :development do
+	gem 'pry'
+	gem 'rspec-rails'
+	gem 'capybara'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
