@@ -20,7 +20,7 @@ group :testing, :development do
 	gem 'pry'
 	gem 'rspec-rails'
 	gem 'capybara'
-	gem 'sqlite3'
+	gem 'pg'
 end
 
 group :production do
