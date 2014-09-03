@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+	before_action :authenticate_user!, only: [:create]
 
 	def create
 		@answer = Answer.new(answer_params)
@@ -15,6 +16,6 @@ class AnswersController < ApplicationController
 	private
 
 	def answer_params
-		params.require(:answer).permit(:body)
+		params.require(:answer).permit(:body, :user_id)
 	end
 end

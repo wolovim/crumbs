@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+	before_action :authenticate_user!, only: [:create, :update]
+
 	def index
 		@questions = Question.all
 	end
@@ -7,6 +9,7 @@ class QuestionsController < ApplicationController
 		@question = Question.find(params[:id])
 		@answer = Answer.new
 		@answer.question_id = @question.id
+
 	end
 
 	def new
@@ -54,6 +57,6 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:title, :content)
+		params.require(:question).permit(:title, :content, :user_id)
 	end
 end

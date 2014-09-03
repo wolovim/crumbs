@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   
-  get 'profiles/show'
-
   devise_for :users
   root 'questions#index'
 
   resources :questions do
     resources :answers
   end
-  
+
+  get 'profiles/:id', to: 'profiles#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
