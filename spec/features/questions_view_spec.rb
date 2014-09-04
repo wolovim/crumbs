@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe 'When viewing the home page' do
-	
-	let(:question) { Question.create(title: "How?", content: "How do I get there?") }
-	let(:answer) 	 { Answer.create(question_id: question.id, body: "Well let me tell ya.") }
+	let(:joe) 		 { User.create(first_name: "Joe", last_name: "Shmoe", email: "joe@example.com", password: "omgomgomg", password_confirmation: "omgomgomg") }
+	let(:question) { Question.create(title: "How?", content: "How do I get there?", user_id: joe.id) }
+	let(:answer) 	 { Answer.create(question_id: question.id, body: "Well let me tell ya.", user_id: joe.id) }
 
 	before(:each) do
 		question
 		answer
+		login
 		visit questions_path
 	end
 
@@ -50,10 +51,12 @@ describe 'When viewing the home page' do
 		expect(page).to have_content "Wait for it..."
 	end
 
-	it "displays a question score" do
+	it "displays a question score that can be manipulated" do
 		expect(page).to have_content "0"
 		click_link_or_button "+"
 		expect(page).to have_content "1"
+		click_link_or_button "-"
+		expect(page).to have_content "0"
 	end
 
 end
