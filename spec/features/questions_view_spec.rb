@@ -44,6 +44,15 @@ describe 'When viewing the home page' do
 		expect(page).not_to have_content "How?"
 	end
 
+	it "can edit a question from the show page" do
+		click_link_or_button "How?"
+		click_link_or_button "Edit"
+		fill_in "Title", with: "Why not?"
+		fill_in "Content", with: "This should work, right?"
+		click_link_or_button "Submit Question"
+		expect(page).to have_content "Why not?"
+	end
+
 	it "can add an answer to a specific question" do
 		click_link_or_button "How?"
 		fill_in "Response:", with: "Wait for it..."

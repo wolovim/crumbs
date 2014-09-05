@@ -6,7 +6,7 @@
 		<% if @questions.any? %>
 			<h3>Questions Asked:</h3>
 			<% @questions.each do |question| %>
-				<%= question.title %><br/>
+				<%= link_to question.title, question_path(question) %><br/>
 			<% end %>
 		<% else %>
 			<h3>No questions asked yet!</h3>
@@ -15,7 +15,7 @@
 		<% if @answers.any? %>
 			<h3>Answers Given:</h3>
 			<% @answers.each do |answer| %>
-				<%= answer.body %><br/>
+				<%= link_to answer.body, question_path(answer.question) %><br/>
 			<% end %>
 		<% else %>
 			<h3>No answers given yet!</h3>
@@ -23,7 +23,40 @@
 	</div>
 
 	<div class="col-md-6">
-		<h2>Held Positions:</h2>
+
+		<h2>Experience:</h2>
+		<% if @positions.any? %>
+			<% @positions.each do |position| %>
+				<strong>Title: </strong><%= position.title %><br/>
+				<strong>Company: </strong><%= position.company %><br/>
+				<strong>From: </strong><%= position.start_date.strftime("%B %Y") %> - <%= position.end_date.strftime("%B %Y") %> (<%= distance_of_time_in_words(position.start_date, position.end_date) %>)<br/>
+				<%= link_to "Edit", '#', class: "btn btn-default btn-xs" %> 
+				<%= link_to "Delete", position, method: :delete, class: "btn btn-danger btn-xs" %>
+				<br/><br/>
+			<% end %>
+		<% else %>
+			<h3>No positions added yet!</h3>
+		<% end %>
 		
+		<br/>
+
+		<% if current_user %>
+			<h4>Add a Position:</h4>
+			<%= form_for @position do |f| %>
+				<%= f.label :title %>
+				<%= f.text_field :title %><br/>
+				<%= f.label :company %>
+				<%= f.text_field :company %><br/>
+				<%= f.label :responsibilities %>
+				<%= f.text_field :responsibilities %><br/>
+				<%= f.label :start_date %>
+				<%= f.date_select :start_date, order: [:day, :month, :year] %><br/>
+				<%= f.label :end_date %>
+				<%= f.date_select :end_date, order: [:day, :month, :year] %><br/>
+				<%= f.hidden_field :user_id, value: current_user.id if current_user %>
+				<%= f.submit "Add position", class: "btn btn-primary" %>
+			<% end %>
+			<br/><br/>
+		<% end %>
 	</div>
 </div>

@@ -3,6 +3,8 @@ class ProfilesController < ApplicationController
   	@user = User.find_by_id(params[:id])
   	@questions = @user.questions.all
   	@answers = @user.answers.all
+  	@positions = @user.positions.all
+  	@position = Position.new
   	if @user
   		render :show
   	else

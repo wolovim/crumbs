@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :questions
   has_many :answers
+  has_many :positions
 
   def full_name
   	first_name + " " + last_name

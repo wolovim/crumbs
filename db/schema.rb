@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903221359) do
+ActiveRecord::Schema.define(version: 20140905152906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20140903221359) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
+  create_table "positions", force: true do |t|
+    t.string   "title"
+    t.string   "company"
+    t.string   "responsibilities"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "positions", ["user_id"], name: "index_positions_on_user_id", using: :btree
+
   create_table "questions", force: true do |t|
     t.string   "title"
     t.string   "content"
@@ -33,6 +46,22 @@ ActiveRecord::Schema.define(version: 20140903221359) do
     t.datetime "updated_at"
     t.integer  "score",      default: 0
     t.integer  "user_id"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
